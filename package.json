@@ -1,5 +1,5 @@
 {
-  "name": "@niuchart/react-hook-form",
+  "name": "react-hook-form",
   "description": "Performant, flexible and extensible forms library for React Hooks",
   "version": "7.61.1-linsmalldragon.fork",
   "main": "dist/index.cjs.js",
@@ -51,8 +51,7 @@
     "prepublishOnly": "pnpm install && pnpm lint:fix && pnpm type && pnpm test && pnpm build",
     "bundlewatch": "pnpm build:modern && bundlewatch",
     "start": "pnpm build:esm && pnpm --dir ./app install && pnpm --dir ./app run dev",
-    "csb:install": "npm i -g pnpm@8 && pnpm i",
-    "publish:skip": "pnpm publish --ignore-scripts --no-git-checks --tag linsmalldragon-fork"
+    "csb:install": "npm i -g pnpm@8 && pnpm i"
   },
   "keywords": [
     "react",
