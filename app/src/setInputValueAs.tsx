@@ -5,24 +5,15 @@ function DefaultValues() {
   const { register, watch, setValue, handleSubmit, getValues } = useForm<any>({
     immerFormValues: true,
     defaultValues: {
-      test: {
+      name: {
         firstName: 'firstName',
         lastName: 'lastName',
       },
-      test2: 'test2',
+      age: 11,
     },
   });
-  const test = watch('test');
-  useEffect(() => {
-    console.log('test', test);
-  }, [test]);
-  console.log(test);
-  let { ref, ...rest } = register('test.firstName', {
-    setInputValueAs: (inputValue) => {
-      return JSON.stringify(inputValue);
-    },
-    immerFormValues: true,
-  });
+  const test = watch('name');
+  let { ref, ...rest } = register('name');
   const inputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inputRef.current);
 
@@ -33,10 +24,10 @@ function DefaultValues() {
           console.log(e);
         }}
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          alert(JSON.stringify(data, null, 2));
         })}
       >
-        <input {...rest} ref={inputRef} />
+        <input {...rest} ref={inputRef} data-json="true" />
         <button type="submit">submit</button>
       </form>
 
@@ -44,14 +35,16 @@ function DefaultValues() {
         type={'button'}
         id={'toggle'}
         onClick={() => {
-          setValue('test', {
-            firstName: 'firstName22222',
-            lastName: 'lastName33333',
+          setValue('name', {
+            firstName: 'firstNameChanged',
+            lastName: 'lastNameChanged',
           });
         }}
       >
         setValue
       </button>
+
+      <div>{JSON.stringify(watch(), null, 2)}</div>
     </>
   );
 }
