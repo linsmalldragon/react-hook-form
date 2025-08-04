@@ -2,16 +2,17 @@ import React, { useEffect, useImperativeHandle, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 function DefaultValues() {
-  const { register, watch, setValue, handleSubmit, getValues } = useForm<any>({
-    immerFormValues: true,
-    defaultValues: {
-      name: {
-        firstName: 'firstName',
-        lastName: 'lastName',
+  const { register, watch, setValue, handleSubmit, getValues, reset } =
+    useForm<any>({
+      immerFormValues: true,
+      defaultValues: {
+        name: {
+          firstName: 'firstName',
+          lastName: 'lastName',
+        },
+        age: 11,
       },
-      age: 11,
-    },
-  });
+    });
   const test = watch('name');
   let { ref, ...rest } = register('name');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,7 +42,22 @@ function DefaultValues() {
           });
         }}
       >
-        setValue
+        set specific value
+      </button>
+
+      <button
+        type={'button'}
+        onClick={() =>
+          reset({
+            name: {
+              firstName: 'firstNameReset',
+              lastName: 'lastNameReset',
+            },
+            age: 22,
+          })
+        }
+      >
+        reset
       </button>
 
       <div>{JSON.stringify(watch(), null, 2)}</div>
