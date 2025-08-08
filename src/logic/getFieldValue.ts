@@ -32,7 +32,7 @@ export default function getFieldValue(_f: Field['_f']) {
   return getFieldValueAs(
     isUndefined(ref.value)
       ? _f.ref.value
-      : isValueJson
+      : isValueJson && ref.value !== ''
         ? JSON.parse(ref.value)
         : ref.value,
     _f,
