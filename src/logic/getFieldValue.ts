@@ -28,15 +28,21 @@ export default function getFieldValue(_f: Field['_f']) {
     return getCheckboxValue(_f.refs).value;
   }
   const dataJsonValue = ref?.getAttribute?.('data-json');
-  const isValueJson = dataJsonValue === 'true';
+  const emptyToUndefinedValue = ref?.getAttribute?.('empty-to-undefined');
   let value;
   if (isUndefined(ref.value)) {
     value = _f.ref.value;
-  } else if (isValueJson) {
+  } else if (dataJsonValue === 'true') {
     if (ref.value === '') {
       value = undefined;
     } else {
       value = JSON.parse(ref.value);
+    }
+  } else if (emptyToUndefinedValue === 'true') {
+    if (ref.value === '') {
+      value = undefined;
+    } else {
+      value = ref.value;
     }
   } else {
     value = ref.value;
