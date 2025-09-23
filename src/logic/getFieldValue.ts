@@ -38,12 +38,8 @@ export default function getFieldValue(_f: Field['_f']) {
     } else {
       value = JSON.parse(ref.value);
     }
-  } else if (emptyToUndefinedValue === 'true') {
-    if (ref.value === '') {
-      value = undefined;
-    } else {
-      value = ref.value;
-    }
+  } else if (emptyToUndefinedValue === 'true' && ref.value === '') {
+    value = undefined;
   } else {
     value = ref.value;
   }
