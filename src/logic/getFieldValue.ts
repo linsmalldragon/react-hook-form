@@ -29,12 +29,18 @@ export default function getFieldValue(_f: Field['_f']) {
   }
   const dataJsonValue = ref?.getAttribute?.('data-json');
   const isValueJson = dataJsonValue === 'true';
-  return getFieldValueAs(
-    isUndefined(ref.value)
-      ? _f.ref.value
-      : isValueJson && ref.value !== ''
-        ? JSON.parse(ref.value)
-        : ref.value,
-    _f,
-  );
+  let value;
+  if (isUndefined(ref.value)) {
+    value = _f.ref.value;
+  } else if (isValueJson) {
+    if (ref.value === '') {
+      value = undefined;
+    } else {
+      value = JSON.parse(ref.value);
+    }
+  } else {
+    value = ref.value;
+  }
+
+  return getFieldValueAs(value, _f);
 }
